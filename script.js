@@ -1,0 +1,54 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Reveal animations on scroll
+    const faders = document.querySelectorAll('.fade-in');
+
+    const appearOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(
+        entries,
+        appearOnScroll
+    ) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return;
+            } else {
+                entry.target.classList.add('appear');
+                appearOnScroll.unobserve(entry.target);
+            }
+        });
+    },
+    appearOptions);
+
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
+
+    // Subtle bokeh movement on mouse move
+    const circles = document.querySelectorAll('.bokeh-circle');
+    document.addEventListener('mousemove', (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+
+        circles.forEach((circle, index) => {
+            const speed = (index + 1) * 20;
+            const moveX = (x * speed) - (speed / 2);
+            const moveY = (y * speed) - (speed / 2);
+            circle.style.transform = `translate(${moveX}px, ${moveY}px) scale(${1 + (x * 0.1)})`;
+        });
+    });
+
+    // CTA Button subtle effect
+    const ctaButton = document.querySelector('.cta-button');
+    if (ctaButton) {
+        ctaButton.addEventListener('click', () => {
+            ctaButton.innerText = "Sent with a smile 🙂";
+            ctaButton.style.backgroundColor = "rgba(251, 195, 188, 0.4)";
+            ctaButton.style.color = "white";
+            ctaButton.style.cursor = "default";
+            ctaButton.disabled = true;
+        });
+    }
+});
