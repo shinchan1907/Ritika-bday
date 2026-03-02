@@ -3,11 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const faders = document.querySelectorAll('.fade-in');
 
     const appearOptions = {
-        threshold: 0.15,
+        threshold: 0.1,
         rootMargin: "0px 0px -50px 0px"
     };
 
-    const appearOnScroll = new IntersectionObserver(function(
+    const appearOnScroll = new IntersectionObserver(function (
         entries,
         appearOnScroll
     ) {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     },
-    appearOptions);
+        appearOptions);
 
     faders.forEach(fader => {
         appearOnScroll.observe(fader);
@@ -33,10 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const y = e.clientY / window.innerHeight;
 
         circles.forEach((circle, index) => {
-            const speed = (index + 1) * 20;
+            const speed = (index + 1) * 15;
             const moveX = (x * speed) - (speed / 2);
             const moveY = (y * speed) - (speed / 2);
-            circle.style.transform = `translate(${moveX}px, ${moveY}px) scale(${1 + (x * 0.1)})`;
+            circle.style.transform = `translate(${moveX}px, ${moveY}px)`;
         });
     });
 
@@ -45,10 +45,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ctaButton) {
         ctaButton.addEventListener('click', () => {
             ctaButton.innerText = "Sent with a smile 🙂";
-            ctaButton.style.backgroundColor = "rgba(251, 195, 188, 0.4)";
+            ctaButton.style.backgroundColor = "rgba(251, 195, 188, 0.6)";
             ctaButton.style.color = "white";
             ctaButton.style.cursor = "default";
             ctaButton.disabled = true;
         });
     }
+
+    // Hide scroll-down indicator after first scroll
+    const scrollDown = document.querySelector('.scroll-down');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            scrollDown.style.opacity = '0';
+            scrollDown.style.pointerEvents = 'none';
+        } else {
+            scrollDown.style.opacity = '1';
+            scrollDown.style.pointerEvents = 'all';
+        }
+    });
 });

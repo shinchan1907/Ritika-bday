@@ -118,6 +118,7 @@ section {
 .hero {
     text-align: center;
     padding-top: 120px;
+    min-height: 100vh;
 }
 
 .hero-title {
@@ -134,9 +135,100 @@ section {
     opacity: 0.8;
 }
 
+/* Scroll Down Indicator */
+.scroll-down {
+    margin-top: 60px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.scroll-down:hover {
+    transform: scale(1.05);
+}
+
+.mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid var(--text-heading);
+    border-radius: 20px;
+    display: block;
+    position: relative;
+    margin-bottom: 8px;
+    opacity: 0.6;
+}
+
+.wheel {
+    width: 4px;
+    height: 4px;
+    background: var(--text-heading);
+    border-radius: 50%;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-wheel 2s infinite;
+}
+
+.arrows {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.arrows span {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-bottom: 2px solid var(--text-heading);
+    border-right: 2px solid var(--text-heading);
+    transform: rotate(45deg);
+    margin: -6px 0;
+    animation: arrows-anim 2s infinite;
+    opacity: 0;
+}
+
+.arrows span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.arrows span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes scroll-wheel {
+    0% {
+        top: 8px;
+        opacity: 1;
+    }
+
+    100% {
+        top: 25px;
+        opacity: 0;
+    }
+}
+
+@keyframes arrows-anim {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-5px, -5px);
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+}
+
 /* Photo Gallery Section */
 .photo-section {
-    padding: 60px 0;
+    padding: 100px 0;
 }
 
 .gallery {
@@ -181,7 +273,7 @@ section {
 
 /* Message Section (Handwritten-style card) */
 .message-section {
-    background: transparent;
+    padding: 100px 0;
 }
 
 .handwritten-card {
